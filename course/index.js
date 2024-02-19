@@ -1,8 +1,10 @@
 
 function showModal(id)
 {
-	if (!id)
+	if (!id) {
+		console.warn("The provided modal (id) was not found. ID: ", id);
 		return ;
+	}
 	const modal = document.getElementById(id);
 	modal.showModal();
 }
@@ -22,4 +24,16 @@ if (newProjectBtn) {
 	newProjectBtn.addEventListener("click", () => {showModal("new-project-modal")});
 } else {
 	console.warn("New projects button was not found");
+}
+
+//Catching up form data
+const projectForm = document.getElementById("new-project-form");
+if (!projectForm) {
+	console.warn("The project form was not found, check the ID!");
+} else {
+	projectForm.addEventListener("submmit", (e) => {
+		e.preventDefault()
+		const formData = new FormData(projectForm)
+		console.log("Name: ", formData.get("description"))
+	})
 }
