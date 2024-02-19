@@ -26,7 +26,7 @@
 │   ├── 4.3. Updating the detauls page UI
 │   └── 4.1. Remote repositories at GitHub
 ├── 5. JS helper lesssons
-│	├── 5.1. Whats is this chapter about?
+│   ├── 5.1. Whats is this chapter about?
 │   ├── 5.2. Block scope
 │   ├── 5.3. Variable reassignment
 │   ├── 5.4. Ternary operator

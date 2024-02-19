@@ -16,6 +16,8 @@ const showModal = () => {
 }
 */
 
+
+
 // This document object is provided by the browser, and its main purpose is to help us interact with the DOM.
 const newProjectBtn = document.getElementById("new-project-btn");
 //console.log("new projects btn value: ", newProjectBtn);
@@ -27,13 +29,14 @@ if (newProjectBtn) {
 }
 
 //Catching up form data
-const projectForm = document.getElementById("new-project-form");
+const projectForm = document.getElementById("new-project-form")
 if (!projectForm) {
-	console.warn("The project form was not found, check the ID!");
+	console.warn("The project form was not found. Check the ID!")
+ 
 } else {
-	projectForm.addEventListener("submmit", (e) => {
+	projectForm.addEventListener("submit", (e) => {
 		e.preventDefault()
 		const formData = new FormData(projectForm)
-		console.log("Name: ", formData.get("description"))
-	})
+		console.log("Description:", formData.get("description"))
+	  })
 }
