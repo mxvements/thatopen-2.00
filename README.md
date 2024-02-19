@@ -11,7 +11,7 @@
 │   └── 2.5. Catching up form data
 ├── 3. Introducing advanced code to the projects page
 │   ├── 3.1. Introducing  bundling and the package manager
-│	├── 3.2. Creating a project class
+│   ├── 3.2. Creating a project class
 │   ├── 3.3. Introducing TS to the code 
 │   ├── 3.4. Using custom types for the Project class 
 │   ├── 3.5. Creating project cards from code
