@@ -1,6 +1,7 @@
 import { Project } from "./classes/Project";
-
-
+import { IProject } from "./classes/Project";
+import { UserRole } from "./classes/Project";
+import { PorjectStatus } from "./classes/Project";
 // FUNCTS
 
 function showModal(id: string)
@@ -39,12 +40,12 @@ if (projectForm && projectForm instanceof HTMLFormElement){
 	projectForm.addEventListener("submit", (e) => {
 		e.preventDefault()
 		const formData = new FormData(projectForm);
-		const projectData = {
-			name: formData.get("name"),
-			description: formData.get("description"),
-			user_role: formData.get("userRole"),
-			status: formData.get("status"),
-			finish_date: formData.get("finishDate")
+		const projectData: IProject = {
+			name: formData.get("name") as string,
+			description: formData.get("description") as string,
+			user_role: formData.get("userRole") as UserRole,
+			status: formData.get("status") as PorjectStatus,
+			finish_date: new Date(formData.get("finishDate") as string)
 		}
 		/*const project = new Project(
 			formData.get("name"),
