@@ -1,3 +1,5 @@
+import { Project } from "./classes/Project";
+
 
 // FUNCTS
 
@@ -17,24 +19,6 @@ const showModal = () => {
 	modal.showModal()
 }
 */
-
-// PROJECT CLASS
-
-class Project {
-	name;
-	description;
-	user_role;
-	status;
-	finish_date;
-
-	constructor(name, description, user_role, status, finish_date){
-		this.name = name;
-		this.description = description;
-		this.user_role = user_role;
-		this.status = status;
-		this.finish_date = finish_date; 
-	}
-}
 
 
 // DOM INTERACTIVITY
@@ -57,13 +41,21 @@ if (!projectForm) {
 	projectForm.addEventListener("submit", (e) => {
 		e.preventDefault()
 		const formData = new FormData(projectForm);
-		const project = new Project(
+		/*const project = new Project(
 			formData.get("name"),
 			formData.get("description"),
 			formData.get("userRole"),
 			formData.get("status"),
 			formData.get("finishDate")
-		);
+		);*/
+		const projectData = {
+			name: formData.get("name"),
+			description: formData.get("description"),
+			user_role: formData.get("userRole"),
+			status: formData.get("status"),
+			finish_date: formData.get("finishDate")
+		}
+		const project = new Project(projectData);
 		console.log(project);
 	  })
 }
