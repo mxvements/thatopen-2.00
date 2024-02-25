@@ -3,14 +3,14 @@ import { Project } from "./classes/Project";
 
 // FUNCTS
 
-function showModal(id)
+function showModal(id: string)
 {
-	if (!id) {
-		console.warn("The provided modal (id) was not found. ID: ", id);
-		return ;
-	}
 	const modal = document.getElementById(id);
-	modal.showModal();
+	if (modal && modal instanceof HTMLDialogElement) {
+	 	modal.showModal();
+	} else {
+		console.warn("The provided modal (id) was not found. ID: ", id);
+	}
 }
 /* this works as well:
 
@@ -35,19 +35,10 @@ if (newProjectBtn) {
 
 // Catching up form data
 const projectForm = document.getElementById("new-project-form")
-if (!projectForm) {
-	console.warn("The project form was not found. Check the ID!");
-} else {
+if (projectForm && projectForm instanceof HTMLFormElement){
 	projectForm.addEventListener("submit", (e) => {
 		e.preventDefault()
 		const formData = new FormData(projectForm);
-		/*const project = new Project(
-			formData.get("name"),
-			formData.get("description"),
-			formData.get("userRole"),
-			formData.get("status"),
-			formData.get("finishDate")
-		);*/
 		const projectData = {
 			name: formData.get("name"),
 			description: formData.get("description"),
@@ -55,7 +46,16 @@ if (!projectForm) {
 			status: formData.get("status"),
 			finish_date: formData.get("finishDate")
 		}
+		/*const project = new Project(
+			formData.get("name"),
+			formData.get("description"),
+			formData.get("userRole"),
+			formData.get("status"),
+			formData.get("finishDate")
+		);*/
 		const project = new Project(projectData);
 		console.log(project);
-	  })
+	  });
+} else {
+	console.warn("The project form was not found. Check the ID!");
 }
