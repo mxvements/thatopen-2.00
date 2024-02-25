@@ -1,4 +1,6 @@
 
+// FUNCTS
+
 function showModal(id)
 {
 	if (!id) {
@@ -16,7 +18,26 @@ const showModal = () => {
 }
 */
 
+// PROJECT CLASS
 
+class Project {
+	name;
+	description;
+	user_role;
+	status;
+	finish_date;
+
+	constructor(name, description, user_role, status, finish_date){
+		this.name = name;
+		this.description = description;
+		this.user_role = user_role;
+		this.status = status;
+		this.finish_date = finish_date; 
+	}
+}
+
+
+// DOM INTERACTIVITY
 
 // This document object is provided by the browser, and its main purpose is to help us interact with the DOM.
 const newProjectBtn = document.getElementById("new-project-btn");
@@ -28,15 +49,21 @@ if (newProjectBtn) {
 	console.warn("New projects button was not found");
 }
 
-//Catching up form data
+// Catching up form data
 const projectForm = document.getElementById("new-project-form")
 if (!projectForm) {
-	console.warn("The project form was not found. Check the ID!")
- 
+	console.warn("The project form was not found. Check the ID!");
 } else {
 	projectForm.addEventListener("submit", (e) => {
 		e.preventDefault()
-		const formData = new FormData(projectForm)
-		console.log("Description:", formData.get("description"))
+		const formData = new FormData(projectForm);
+		const project = new Project(
+			formData.get("name"),
+			formData.get("description"),
+			formData.get("userRole"),
+			formData.get("status"),
+			formData.get("finishDate")
+		);
+		console.log(project);
 	  })
 }
