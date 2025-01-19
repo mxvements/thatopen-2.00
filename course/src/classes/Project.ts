@@ -8,20 +8,21 @@ export type UserRole = "architect" | "engineer" | "developer";
 export interface IProject {
 	name: string;
 	description: string;
-	user_role: UserRole;
+	userRole: UserRole;
 	status: PorjectStatus;
-	finish_date: Date;	
+	finishDate: Date;	
 }
 
 /*
 	Class
 */ 
 export class Project implements IProject{
+	//IProject
 	name: string;
 	description: string;
-	user_role: UserRole;
+	userRole: UserRole;
 	status: PorjectStatus;
-	finish_date: Date;
+	finishDate: Date;
 	//class internals
 	ui: HTMLDivElement;
 	cost: number = 0;
@@ -38,22 +39,22 @@ export class Project implements IProject{
 	constructor(data: IProject){
 		this.name = data.name;
 		this.description = data.description;
-		this.user_role = data.user_role;
+		this.userRole = data.userRole;
 		this.status = data.status;
-		this.finish_date = data.finish_date;
+		this.finishDate = data.finishDate;
 		this.setUI();
 	}
 
 	setUI()
 	{
-		if (this.ui) {return ;}
+		if (this.ui) {return ;} //so there's only 1 card per project
 		this.ui = document.createElement("div");
 		this.ui.className = "project-card"; //we need tha name for the css
 		this.ui.innerHTML = `
 			<div class="card-header">
 				<p style="background-color: #ca8134; padding: 10px; border-radius: 8px; aspect-ratio: 1;">HC</p>
 				<div>
-				<h5>${this.name}/h5>
+				<h5>${this.name}</h5>
 				<p>${this.description}</p>
 				</div>
 			</div>
@@ -64,7 +65,7 @@ export class Project implements IProject{
 				</div>
 				<div class="card-property">
 				<p style="color: #969696;">Role</p>
-				<p>${this.user_role}</p>
+				<p>${this.userRole}</p>
 				</div>
 				<div class="card-property">
 				<p style="color: #969696;">Cost</p>
@@ -72,7 +73,7 @@ export class Project implements IProject{
 				</div>
 				<div class="card-property">
 				<p style="color: #969696;">Estimated Progress</p>
-				<p>${this.progress}%</p>
+				<p>${this.progress * 100}%</p>
 				</div>
 			</div>
 		`; //copy pasted the code from the one we had on the index.html

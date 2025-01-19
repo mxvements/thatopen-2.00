@@ -1,7 +1,7 @@
-import { Project } from "./classes/Project";
 import { IProject } from "./classes/Project";
 import { UserRole } from "./classes/Project";
 import { PorjectStatus } from "./classes/Project";
+import { ProjectsManager } from "./classes/ProjectsManager";
 // FUNCTS
 
 function showModal(id: string)
@@ -13,16 +13,32 @@ function showModal(id: string)
 		console.warn("The provided modal (id) was not found. ID: ", id);
 	}
 }
-/* this works as well:
 
+/* this works as well:
 const showModal = () => {
 	const modal = document.getElementById("new-project-modall")
 	modal.showModal()
 }
 */
+function closeModal(id: string)
+{
+	const modal = document.getElementById(id);
+	if (modal && modal instanceof HTMLDialogElement) {
+	 	modal.close();
+	} else {
+		console.warn("The provided modal (id) was not found. ID: ", id);
+	}
+}
+/*
+	asignment
+	create a custom function that works a toggleModal instead of having show/closeModal
+*/
 
 
 // DOM INTERACTIVITY
+
+const projectsListUI = document.getElementById("projects-list") as HTMLElement; //type assertion, this may fail
+const projectsManager = new ProjectsManager(projectsListUI);
 
 // This document object is provided by the browser, and its main purpose is to help us interact with the DOM.
 const newProjectBtn = document.getElementById("new-project-btn");
@@ -43,9 +59,9 @@ if (projectForm && projectForm instanceof HTMLFormElement){
 		const projectData: IProject = {
 			name: formData.get("name") as string,
 			description: formData.get("description") as string,
-			user_role: formData.get("userRole") as UserRole,
+			userRole: formData.get("userRole") as UserRole,
 			status: formData.get("status") as PorjectStatus,
-			finish_date: new Date(formData.get("finishDate") as string)
+			finishDate: new Date(formData.get("finishDate") as string)
 		}
 		/*const project = new Project(
 			formData.get("name"),
@@ -53,9 +69,13 @@ if (projectForm && projectForm instanceof HTMLFormElement){
 			formData.get("userRole"),
 			formData.get("status"),
 			formData.get("finishDate")
-		);*/
-		const project = new Project(projectData);
+		);
+		we replace the new Project with the projectManager function
+		*/
+		const project = projectsManager.newProject(projectData);
+		projectForm.reset();
 		console.log(project);
+		closeModal('mew-project-form');
 	  });
 } else {
 	console.warn("The project form was not found. Check the ID!");
